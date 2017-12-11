@@ -274,5 +274,5 @@ $fonts: (
 // All font properties
 @mixin font($id, $size: 1, $unit: $base-unit) {
     @include font-appearance($id);
-    @include font-dimension($id, $size);
+    @include font-dimension($size, $id);
 }

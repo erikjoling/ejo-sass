@@ -1,8 +1,8 @@
 # Ejo Sass Lib
 A minimalistic Sass library for making CSS and SASS life easier. I see Sass as a way to write browserconsistent CSS. This library makes this process easier and more maintainable. 
 
-Version: 2017-12-11  
-Author: Erik Joling <erik@ejoweb.nl>
+- Version: 2017-12-11--2
+- Author: Erik Joling <erik@ejoweb.nl>
 
 Note: Some of these packages prevent the redundancy of writing extensive code over and over again. But I think this should be handled by your editor via code-snippets. I think it's unnecessary to distantiate from vanilla CSS for this reason. 
 

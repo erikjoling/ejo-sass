@@ -47,12 +47,24 @@ $borders: (
 
 // Get border width from settings
 @function border-width($name: base) {
-
     $border: get-border($name);
-
-    @if ( $border == false OR map-has-key($border, 'width') == false ) {
-        @warn "`#{$name}` not found in borders. Returning `0`";
-        @return 0;
+    $default: 0;
+    
+    // Exit if border does not exist
+    @if ( $border == false ) {
+        @return $default;
+    }
+        
+    // Try to get `base` border-width if no `width` exists
+    @if (map-has-key($border, 'width') == false) {
+        
+        // Exit if `base` has no border-width        
+        @if ( $name == 'base' ) {
+            @warn "Width not found in border `#{$name}`. Returning `#{$default}`";
+            @return $default;
+        }
+        
+        @return border-width(base);
     }
 
     @return map-get($border, 'width');
@@ -60,12 +72,24 @@ $borders: (
 
 // Get border style from settings
 @function border-style($name: base) {
-
     $border: get-border($name);
-
-    @if ( $border == false OR map-has-key($border, 'style') == false ) {
-        @warn "Style not found in `#{$name}` (border). Returning `none`";
-        @return none;
+    $default: none;
+    
+    // Exit if border does not exist
+    @if ( $border == false ) {
+        @return $default;
+    }
+        
+    // Try to get `base` border-width if no `style` exists
+    @if (map-has-key($border, 'style') == false) {
+        
+        // Exit if `base` has no border-style        
+        @if ( $name == 'base' ) {
+            @warn "Style not found in border `#{$name}`. Returning `#{$default}`";
+            @return $default;
+        }
+        
+        @return border-style(base);
     }
 
     @return map-get($border, 'style');
@@ -73,27 +97,49 @@ $borders: (
 
 // Get border color from settings
 @function border-color($name: base) {
-
     $border: get-border($name);
-
-    @if ( $border == false OR map-has-key($border, 'color') == false ) {
-        @warn "Color not found in `#{$name}` (border). Returning `inherit`";
-        @return inherit;
+    $default: inherit;
+    
+    // Exit if border does not exist
+    @if ( $border == false ) {
+        @return $default;
+    }
+        
+    // Try to get `base` border-width if no `color` exists
+    @if (map-has-key($border, 'color') == false) {
+        
+        // Exit if `base` has no border-color        
+        @if ( $name == 'base' ) {
+            @warn "Color not found in border `#{$name}`. Returning `#{$default}`";
+            @return $default;
+        }
+        
+        @return border-color(base);
     }
 
-    $border-color: map-get($border, 'color');
-
-    @return $border-color;
+    @return map-get($border, 'color');
 }
 
 // Get border radius from settings
 @function border-radius($name: base) {
-
     $border: get-border($name);
-
-    @if ( $border == false OR map-has-key($border, 'radius') == false ) {
-        @warn "Radius not found in `#{$name}` (border). Returning `0`";
-        @return 0;
+    $default: 0;
+    
+    // Exit if border does not exist
+    @if ( $border == false ) {
+        @return $default;
+    }
+        
+    // Try to get `base` border-width if no `radius` exists
+    @if (map-has-key($border, 'radius') == false) {
+        
+        // Exit if `base` has no border-radius        
+        @if ( $name == 'base' ) {
+            @warn "Radius not found in border `#{$name}`. Returning `#{$default}`";
+            @return $default;
+        }
+        
+        @return border-radius(base);
     }
 
     @return map-get($border, 'radius');
