@@ -8,7 +8,7 @@
 // Usage
 // 
 //   - @include font-appearance(Arial, bold, italic);
-//   - @include font-dimension(0.8, Arial);
+//   - @include font-dimension(sm, Arial);
 //   - font-weight: font-weight(bold, Arial);
 //
 // Documentation
@@ -40,7 +40,7 @@
 // 
 //   @mixins
 //     - font-appearance($id, [$weight], [$style])
-//     - font-dimension($id, $size, [$unit])
+//     - font-dimension($size, $id, [$unit])
 //     - font($id, $size, [$unit])
 // 
 //////
@@ -70,6 +70,14 @@ $fonts: (
     ),
 ) !default;
 
+// Font sizes
+$font-sizes: (
+    xs:   0.75,  
+    sm:   0.875, 
+    base: 1,     
+    lg:   1.125, 
+    xl:   1.25,  
+) !default;
 
 //
 // HELPERS
@@ -196,6 +204,17 @@ $fonts: (
 
 // Line height
 @function get-line-height($size, $unit: $base-unit) {
+    
+    @if ('string' == type-of($size)) {
+        @if (map-has-key($font-sizes, $size) == false) {
+            @warn "$size #{$size} not found in font-sizes";
+            $size: 1;
+        }
+        @else {
+            $size: map-get($font-sizes, $size);
+        }
+    }
+
     $base-line-height: $size * $base-line-height-ratio;
 
     @if ($unit == rem) {
@@ -208,13 +227,24 @@ $fonts: (
 
 // Get font-size from $font-dimensions
 @function get-font-size($size, $id: $base-font, $unit: $base-unit) {
+
+    $font-size: $base-font-size;
     $font-size-correction: get-font-size-correction($id);
 
-    @if ($font-size-correction == false) {
-        $font-size-correction: 0;
+    @if ($font-size-correction != false) {
+        $font-size: $font-size + $font-size-correction;
     }
 
-    $font-size: $base-font-size + $font-size-correction;
+    @if ('string' == type-of($size)) {
+        @if (map-has-key($font-sizes, $size) == false) {
+            @warn "$size #{$size} not found in font-sizes";
+            $size: 1;
+        }
+        @else {
+            $size: map-get($font-sizes, $size);
+        }
+    }
+
     $font-size: $font-size * $size;
 
     @if ($unit == rem) {
