@@ -1,0 +1,20 @@
+{
+  "name": "ejo-sass",
+  "description": "A minimalistic Sass library for making CSS and SASS life easier. I see Sass as a way to write browserconsistent CSS. This library makes this process easier and more maintainable.",
+  "version": "0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikjoling/ejo-sass.git"
+  },
+  "author": "Erik Joling <erik@joling.me> (https://erik.joling.me)",
+  "homepage": "https://github.com/erikjoling/ejo-sass#readme",
+  "keywords": ["sass"],
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/erikjoling/ejo-sass/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
